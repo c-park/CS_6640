@@ -1,0 +1,17 @@
+% Test script for A2
+% Cade Parkison
+
+%%%%%%%%%%%%%%
+% Problem 2
+%%%%%%%%%%%%%%
+
+% number of corresponding points
+num_cor = 2;
+
+% Test points
+cpts = [0 0; 50 50; 100 100; 200 200]
+
+[size(cpts)
+
+
+
