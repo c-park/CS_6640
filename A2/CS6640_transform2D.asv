@@ -17,8 +17,6 @@ function [xp,yp] = CS6640_transform2D(x,y,q)
 %
 
 
-xp = q(1) + q(2)*x + q(3)*y + q(4)*x*y + q(5)*x^2 + q(6)*y^2;
-yp = q(7) + q(8)*x + q(9)*y + q(10)*x*y + q(11)*x^2 + q(12)*y^2;
+xp = q(1) + q(2)*x + q(3)*y + q(4)
 
 
-end

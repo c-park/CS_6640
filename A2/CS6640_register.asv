@@ -18,13 +18,6 @@ function [imr,q,A] = CS6640_register(im,s,cpts)
 %     Fall 2018
 %
 
-% Convert to grayscale if not already grayscale
-if size(im,3) == 3
-    im=rgb2gray(im);
-else
-    im = im;
-end
-
 [M,N] = size(im);
 
 imr = zeros(M,N);
@@ -53,8 +46,7 @@ switch(s)
             A(2*(i-1)+1,:) = [1,pts1(i,1),pts1(i,2),pts1(i,1)*pts1(i,2),...
                 pts1(i,1)*pts1(i,1),pts1(i,2)*pts1(i,2),zeros(1,6)];
             A(2*(i-1)+2,:) = [zeros(1,6),1,pts1(i,1),pts1(i,2),...
-                pts1(i,1)*pts1(i,2),pts1(i,1)*pts1(i,1),...
-                pts1(i,2)*pts1(i,2)];
+                pts1(i,1)*pts1(i,2),pts1(i,1)*pts1(i,1),pts1(i,2)*pts1(i,2)];
         end
         q = lsqlin(A,b);
         A = zeros(3,3);
@@ -63,7 +55,6 @@ switch(s)
         for i = 1:M
             for j = 1:N
                 % NEED TO CALL TRANSFORM2D HERE
-                [xp,yp] = CS6640_transform2D(i,j,q);
                 
                 % in case transformed coords are floats, round to int
                 xp = round(xp);

@@ -16,13 +16,13 @@ cpts = [0 0; 0 0; 100 100; 100 100];
 num_cor = m/2;
 
 % affine/quadratic switch (1=quadratic)
-s = 1;
+s = 0;
 
 [imr,q,A] = CS6640_register(im1, s, cpts);
 
-%Q = reshape(q, [2,3])
 
-
-
+%%%%%%%%%%%%%
+% Problem 3
+%%%%%%%%%%%%%
 
 
