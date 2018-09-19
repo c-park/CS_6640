@@ -1,0 +1,31 @@
+function [imseq] = vidObject2images(video)
+% vidObject2images - convert vidObj to a sequence of images
+% On input:
+%     video (video data structure): vidObj
+% On output:
+%     imseq (MxNxframes array): image sequence from video
+% Call:
+%     imseq = vidObject2images(video);
+% Author:
+%     Cade Parkison U0939163
+%     UU
+%     Fall 2018
+%
+
+m = video.height;
+n = video.width;
+
+
+workingDir = 
+% Loop over each frame and create image sequence
+imseq = [];
+ii=1
+while hasFrame(video)
+    img = readFrame(video);
+    filename = [sprintf('%03d',ii) '.jpg'];
+    fullname = fullfile(workingDir,'images',filename);
+    imwrite(img,fullname)    % Write out to a JPEG file (img1.jpg, img2.jpg, etc.)
+    ii = ii+1;
+end
+
+

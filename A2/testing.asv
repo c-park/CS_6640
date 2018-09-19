@@ -1,0 +1,59 @@
+% Testing.m - Test script for running the code for Assignment 2
+% 
+% Each Problem is seperated into Matlab code sections and can be ran 
+%     individually by presing CTRL-Enter 
+%
+% Author:
+%     Cade Parkison
+%     UU
+%     Fall 2018
+%
+
+%%%%%%%%%%%%%%
+%% Problem 1
+%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%
+%% Problem 2
+%%%%%%%%%%%%%%
+
+% CS6640_register()
+
+% Test image
+im1 = imread('im1.jpg');
+
+% Test points
+cpts = [0 0; 0 0; 100 100; 100 100];
+[m,n] = size(cpts);
+num_cor = m/2;
+
+% affine/quadratic switch (1=quadratic)
+s = 0;
+
+[imr,q,A] = CS6640_register(im1, s, cpts);
+
+
+%%%%%%%%%%%%%
+%% Problem 3
+%%%%%%%%%%%%%
+
+video = VideoReader('video.avi');
+
+[M,tr] = CS6640_track(video);
+
+
+%%%%%%%%%%
+%% MISC
+%%%%%%%%%% 
+v = VideoReader('video.avi');
+
+bg = CS6640_backgound(v);
+
+%%%%%%%%%%
+%% MISC2
+%%%%%%%%%% 
+v = VideoReader('video.avi');
+
+frames = read(v);
