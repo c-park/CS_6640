@@ -18,7 +18,6 @@ T = zeros(M,N, 25);
 
 window = 5;
 
-
 for i=3:M-2
     for j=3:N-2
         
@@ -26,19 +25,19 @@ for i=3:M-2
         w = im(i-2:i+2, j-2:j+2);
         
         % take FFT of window
-        F = fft2(w);
+        f = 
         
         % get power spectrum of F 
-        ps = F.*conj(F);
+        ps = 
         
         % Fill in T at (x,y,t) where t is the texture parameter 1:25
-        T(i,j,1:25) = ps(:);
+        T(i,j,1:25) = ps;
        
     end
 end
 
 % reshape T to (480*640 x 25)
-T = reshape(T, M*N, 25);
+T = reshape(T, (M*N, 25));
 
 
 

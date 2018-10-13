@@ -1,4 +1,3 @@
-
 function  T = CS6640_FFT_angular(im)
 %  CS6640_FFT_angular - compute FFT angular texture parameters
 % On input:
@@ -13,5 +12,3 @@ function  T = CS6640_FFT_angular(im)
 %     UU
 %     Fall 2018
 %
-
-test

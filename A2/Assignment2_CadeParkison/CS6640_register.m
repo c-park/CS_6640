@@ -35,8 +35,8 @@ imr = zeros(M,N);
 num_cor = m/2;
 
 % splitting cpts into two matrices, one for each image
-pts1 = cpts(1:2:end,:)
-pts2 = cpts(2:2:end,:)
+pts1 = cpts(1:2:end,:);
+pts2 = cpts(2:2:end,:);
 
 pts1(1,1);
 pts1(1,2);

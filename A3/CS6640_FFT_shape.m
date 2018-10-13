@@ -1,3 +1,4 @@
+
 function  X = CS6640_FFT_shape(Z,w)
 %  CS6640_FFT_shape - compute Fourier shape descriptors for a curve
 % On input:
@@ -12,3 +13,5 @@ function  X = CS6640_FFT_shape(Z,w)
 %     UU
 %     Fall 2018
 %
+
+this is a
