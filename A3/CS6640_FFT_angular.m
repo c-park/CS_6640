@@ -18,7 +18,7 @@ function  T = CS6640_FFT_angular(im)
 T = zeros(M,N, 8);
 
 % Window size W (must be odd number)
-W = 19;
+W = 11;
 % half window
 h = double(idivide(W, int32(2), 'floor'));
 
