@@ -79,10 +79,27 @@ combo(mat2gray(im),(reshape(cidx_a==7,480,640)));title('K=7');
 %% Problem 4
 clear all;close all;clc
 
+H = CS6640_gen_H;
+O = CS6640_gen_O;
+size(O), size(H)
 
+scatter(H(:,1), H(:,2), 25, 'red', 'filled')
+xlim([0 12]);
+ylim([0 12]);
 
+scatter(O(:,1), O(:,2), 25, 'blue', 'filled')
+xlim([0 18]);
+ylim([0 18]);
 
+X1 = CS6640_FFT_shape(H,2);
 
+bar(abs(X1))
+title('Magnitude of "H" Shape Descriptors')
+
+X2 = CS6640_FFT_shape(O,2);
+
+bar(abs(X2))
+title('Magnitude of "O" Shape Descriptors')
 
 
 

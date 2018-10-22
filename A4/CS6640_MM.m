@@ -14,24 +14,62 @@ function M = CS6640_MM(vidObj)
 %     UU
 %
 
-m = vidObj.height;
-n = vidObj.width;
+% Pause time to limit playback rate
+p = 0;
 
-% Find background of vidObj
-bg = CS6640_backgound(vidObj);
+k=1;
 
-% Loop over each frame and create difference image
-i = 1;
-vidObj.CurrentTime = 0;
+% Intensity threshold for establishing movement
+threshold = 20;
 while hasFrame(vidObj)
-    vidFrame = readFrame(vidObj);
-  
-    dff = mat2gray(double(rgb2gray(vidFrame))) - bg;
-    % Threshold dff images to binary with threshold
-    %bw = dff_gray > 50;
+    vidFrame = double(rgb2gray(readFrame(vidObj)));
+
+    % Initialize frames first time through
+    if k==1
+        im = vidFrame;
+        im_subtract = im;
+        ROW = size(vidFrame,1);
+        COL = size(vidFrame,2);
+        im_tracks = zeros(ROW, COL);
+    else
+        % Find movement by checking sequential frames
+        im_subtract = vidFrame - im_last;
+    end
     
-    imshow(dff);
-    M(i) = getframe(gca); 
+    % Save current image for next procesing loop
+    im_last = vidFrame;
     
-    i = i+1;
+    % capture movement and use a threshold to filter small variances
+    im_movement = im_subtract > threshold;
+      
+    %%%%%%%%%%%%
+    % MORPHOLOGY
+    %%%%%%%%%%%%
+    
+    strel1 = strel('disk',1);
+    im_open = imopen(im_movement,strel1);
+    
+    %im_open = bwareaopen(im_open,7);
+    
+    strel2 = strel('rectangle', [40,65]);
+    %strel2 = strel('disk', 20);
+    im_dil = imdilate(im_open, strel2);
+    
+    %im_fill = imfill(im_dil, 'holes');
+    
+    strel3 = strel('rectangle', [20,25]);
+    %strel3 = strel('disk', 10);
+    im_erode = imerode(im_dil, strel3);
+    
+    %%%%%%%%%%%%
+    
+    % Capture video
+    figure(1);
+    imshow(im_erode);
+    M(k) = getframe(gca);
+    %pause(p);
+
+    k = k+1;
+end
+
 end
