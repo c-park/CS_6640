@@ -1,0 +1,1410 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{A7\_Testing}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Assignment A7: Bayesian
+Classification}\label{assignment-a7-bayesian-classification}
+
+\subsubsection{CS 6640}\label{cs-6640}
+
+\subsubsection{Fall 2018}\label{fall-2018}
+
+\textbf{By:} Cade Parkison
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    You are to develop a vehicle pattern recognition function based on the
+optimal Bayes classifier. Using the videos found in the CS6640 class
+data sub-directory A7, select the first 2 (i.e., \textless{} X
+\textgreater{} 1 and \textless{} X \textgreater{} 2) for the three
+classes, bus, car, and truck, to get training vectors with suitable
+features, and then build Bayes models and evaluate those models on the
+remaining videos (i.e., classify the vehicles in each frame). Carefully
+describe each step of the process; data collection, feature selection
+and computation, model choice, training results, and evaluation.
+Implement the requested two functions.
+
+    \textbf{Bayes Classifier:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{c}{\PYZpc{}\PYZpc{}file CS6640\PYZus{}Bayes.m}
+          \PY{k}{function}\PY{+w}{ }best\PYZus{}class \PY{p}{=}\PY{+w}{ }\PY{n+nf}{CS6640\PYZus{}Bayes}\PY{p}{(}x,class\PYZus{}probs,class\PYZus{}models\PY{p}{)}
+          \PY{c}{\PYZpc{} CS6640\PYZus{}Bayes \PYZhy{} Bayes classifier}
+          \PY{c}{\PYZpc{} On input:}
+          \PY{c}{\PYZpc{}     x (mx1 vector): feature vector}
+          \PY{c}{\PYZpc{}     class\PYZus{}probs (1xn vector): probabilities of n classes (sums to 1)}
+          \PY{c}{\PYZpc{}     class\PYZus{}models (1xn vector struct): class models: means and}
+          \PY{c}{\PYZpc{}     variances}
+          \PY{c}{\PYZpc{}       (k).mean (mx1 vector): k\PYZus{}th class mean vector}
+          \PY{c}{\PYZpc{}       (k).var (mxm array): k\PYZus{}th class covariance matrix}
+          \PY{c}{\PYZpc{} On output:}
+          \PY{c}{\PYZpc{}     best\PYZus{}class (int): index of best class for x}
+          \PY{c}{\PYZpc{} Call:}
+          \PY{c}{\PYZpc{}     c = CS6640\PYZus{}Bayes(x,cp,cm);}
+          \PY{c}{\PYZpc{} Author:}
+          \PY{c}{\PYZpc{}     Cade Parkison}
+          \PY{c}{\PYZpc{}     UU}
+          \PY{c}{\PYZpc{}     Fall 2018}
+          \PY{c}{\PYZpc{}}
+          
+          \PY{c}{\PYZpc{} number of features}
+          \PY{n}{m} \PY{p}{=} \PY{n+nb}{length}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{;}
+          
+          \PY{c}{\PYZpc{} number of classes}
+          \PY{n}{n} \PY{p}{=} \PY{n+nb}{length}\PY{p}{(}\PY{n}{class\PYZus{}probs}\PY{p}{)}\PY{p}{;}
+          
+          \PY{c}{\PYZpc{} stores the bayes decision function values for each class}
+          \PY{n}{bayes} \PY{p}{=} \PY{n+nb}{zeros}\PY{p}{(}\PY{p}{[}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+          
+          \PY{c}{\PYZpc{} loop over each class and find the bayes decision function}
+          \PY{k}{for} \PY{n+nb}{j}\PY{p}{=}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{n}
+              \PY{n}{Pj} \PY{p}{=} \PY{n}{class\PYZus{}probs}\PY{p}{(}\PY{n+nb}{j}\PY{p}{)}\PY{p}{;}
+              \PY{n}{Cj} \PY{p}{=} \PY{n}{class\PYZus{}models}\PY{p}{(}\PY{n+nb}{j}\PY{p}{)}\PY{p}{.}\PY{n}{var}\PY{p}{;}
+              \PY{n}{Mj} \PY{p}{=} \PY{n}{class\PYZus{}models}\PY{p}{(}\PY{n+nb}{j}\PY{p}{)}\PY{p}{.}\PY{n}{mean}\PY{p}{;}
+              
+              \PY{n}{bayes}\PY{p}{(}\PY{n+nb}{j}\PY{p}{)} \PY{p}{=} \PY{n+nb}{log}\PY{p}{(}\PY{n}{Pj}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb}{log}\PY{p}{(}\PY{n}{det}\PY{p}{(}\PY{n}{Cj}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{Mj}\PY{p}{)}\PY{o}{\PYZsq{}}\PY{o}{*}\PY{n}{inv}\PY{p}{(}\PY{n}{Cj}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{Mj}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+          \PY{k}{end}
+          
+          \PY{p}{[}\PY{o}{\PYZti{}}\PY{p}{,}\PY{n}{best\PYZus{}class}\PY{p}{]} \PY{p}{=} \PY{n}{max}\PY{p}{(}\PY{n}{bayes}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Created file 'C:\textbackslash{}Users\textbackslash{}cadep\textbackslash{}School\textbackslash{}CS\_6640\textbackslash{}A7\textbackslash{}CS6640\_Bayes.m'.
+
+    \end{Verbatim}
+
+    \textbf{Build Bayes Model:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c}{\PYZpc{}\PYZpc{}file CS6640\PYZus{}build\PYZus{}Bayes.m}
+         \PY{k}{function}\PY{+w}{ }model \PY{p}{=}\PY{+w}{ }\PY{n+nf}{CS6640\PYZus{}build\PYZus{}Bayes}\PY{p}{(}X\PY{p}{)}
+         \PY{c}{\PYZpc{} CS6640\PYZus{}build\PYZus{}Bayes \PYZhy{} build Bayes model for dataset X}
+         \PY{c}{\PYZpc{} On input:}
+         \PY{c}{\PYZpc{}     X (nxm array): n samples of m\PYZhy{}tuple feature vectors}
+         \PY{c}{\PYZpc{} On output:}
+         \PY{c}{\PYZpc{}     model (struct): model: mean and variance}
+         \PY{c}{\PYZpc{}       .mean (mx1 vector): mean of X}
+         \PY{c}{\PYZpc{}       .var (mxm array): covariance matrix of X}
+         \PY{c}{\PYZpc{} Call:}
+         \PY{c}{\PYZpc{}     m1 = CS6640\PYZus{}build\PYZus{}Bayes([0,0; 0.1,0; \PYZhy{}0.1,0]);}
+         \PY{c}{\PYZpc{} Author:}
+         \PY{c}{\PYZpc{}     Cade Parkison}
+         \PY{c}{\PYZpc{}     UU}
+         \PY{c}{\PYZpc{}     Fall 2018}
+         \PY{c}{\PYZpc{}}
+         
+         \PY{n}{model}\PY{p}{.}\PY{n}{mean} \PY{p}{=} \PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{\PYZsq{}}\PY{p}{;}
+         \PY{n}{model}\PY{p}{.}\PY{n}{var} \PY{p}{=} \PY{n}{cov}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Created file 'C:\textbackslash{}Users\textbackslash{}cadep\textbackslash{}School\textbackslash{}CS\_6640\textbackslash{}A7\textbackslash{}CS6640\_build\_Bayes.m'.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}325}]:} \PY{c}{\PYZpc{}\PYZpc{}file CS6640\PYZus{}data\PYZus{}collection.m}
+          \PY{k}{function}\PY{+w}{ }X \PY{p}{=}\PY{+w}{ }\PY{n+nf}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}object\PYZus{}data\PY{p}{)}
+          \PY{c}{\PYZpc{} CS6640\PYZus{}data\PYZus{}collection \PYZhy{} Cleans segmented movie data and extracts features from each video frame}
+          \PY{c}{\PYZpc{} On input:}
+          \PY{c}{\PYZpc{}     object\PYZus{}data (struct) object data of moving objects from M}
+          \PY{c}{\PYZpc{} On output:}
+          \PY{c}{\PYZpc{}     X (nxm array): n samples of m\PYZhy{}tuple feature vectors}
+          \PY{c}{\PYZpc{} Call:}
+          \PY{c}{\PYZpc{}     X = CS6640\PYZus{}data\PYZus{}collection(M)}
+          \PY{c}{\PYZpc{} Author:}
+          \PY{c}{\PYZpc{}     Cade Parkison}
+          \PY{c}{\PYZpc{}     UU}
+          \PY{c}{\PYZpc{}     Fall 2018}
+          \PY{c}{\PYZpc{}}
+          
+          
+          \PY{n}{M} \PY{p}{=} \PY{l+m+mi}{480}\PY{p}{;}
+          \PY{n}{N} \PY{p}{=} \PY{l+m+mi}{640}\PY{p}{;}
+          \PY{n}{frames} \PY{p}{=} \PY{n+nb}{size}\PY{p}{(}\PY{n}{object\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n}{n\PYZus{}frames} \PY{p}{=} \PY{n}{frames}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+          
+          
+          \PY{c}{\PYZpc{} Filter out all but largest objects }
+          \PY{k}{for} \PY{n}{f}\PY{p}{=}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{n\PYZus{}frames}
+              \PY{n}{objs} \PY{p}{=} \PY{n}{object\PYZus{}data}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{;}
+              \PY{n}{n\PYZus{}objects} \PY{p}{=} \PY{n}{objs}\PY{p}{.}\PY{n}{num\PYZus{}objects}\PY{p}{;}
+              \PY{n}{obj\PYZus{}sizes} \PY{p}{=} \PY{p}{[}\PY{p}{]}\PY{p}{;}
+              \PY{k}{for} \PY{n}{k}\PY{p}{=}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{n\PYZus{}objects}
+                  \PY{n}{obj\PYZus{}sizes} \PY{p}{=} \PY{p}{[}\PY{n}{obj\PYZus{}sizes}\PY{p}{;} \PY{n}{objs}\PY{p}{.}\PY{n}{objects}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{.}\PY{n}{num\PYZus{}pixels}\PY{p}{]}\PY{p}{;}
+              \PY{k}{end}
+              \PY{p}{[}\PY{o}{\PYZti{}}\PY{p}{,}\PY{n}{largest}\PY{p}{]} \PY{p}{=} \PY{n}{max}\PY{p}{(}\PY{n}{obj\PYZus{}sizes}\PY{p}{)}\PY{p}{;}
+              \PY{c}{\PYZpc{} Remove all but the largest object}
+              \PY{c}{\PYZpc{}for k=1:n\PYZus{}objects}
+                  \PY{c}{\PYZpc{}if k\PYZti{}=largest}
+                  \PY{c}{\PYZpc{}    object\PYZus{}data(f).objects(k) = [];}
+                  \PY{c}{\PYZpc{}end}
+              \PY{c}{\PYZpc{}end}
+              \PY{n}{object\PYZus{}data}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{.}\PY{n}{objects} \PY{p}{=} \PY{n}{objs}\PY{p}{.}\PY{n}{objects}\PY{p}{(}\PY{n}{largest}\PY{p}{)}\PY{p}{;}
+              
+              
+          \PY{k}{end}
+          
+          \PY{c}{\PYZpc{} Remove objects that are not near tracked line}
+          \PY{n}{centroids} \PY{p}{=} \PY{p}{[}\PY{p}{]}\PY{p}{;}  \PY{c}{\PYZpc{} (Px2 Array) where P is the number of object centroids in object\PYZus{}data}
+          \PY{k}{for} \PY{n}{f}\PY{p}{=}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{n\PYZus{}frames}
+              \PY{n}{objs} \PY{p}{=} \PY{n}{object\PYZus{}data}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{;}
+              \PY{c}{\PYZpc{}n\PYZus{}objects = objs.num\PYZus{}objects;}
+              \PY{c}{\PYZpc{}for k=1:n\PYZus{}objects}
+              \PY{n}{centroidX} \PY{p}{=} \PY{n}{objs}\PY{p}{.}\PY{n}{objects}\PY{p}{.}\PY{n}{col\PYZus{}mean}\PY{p}{;}
+              \PY{n}{centroidY} \PY{p}{=} \PY{n}{M} \PY{o}{\PYZhy{}} \PY{n}{objs}\PY{p}{.}\PY{n}{objects}\PY{p}{.}\PY{n}{row\PYZus{}mean} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{;}
+              \PY{n}{centroids} \PY{p}{=} \PY{p}{[}\PY{n}{centroids}\PY{p}{;} \PY{p}{[}\PY{n}{centroidX}\PY{p}{,} \PY{n}{centroidY}\PY{p}{]}\PY{p}{]}\PY{p}{;}
+              \PY{c}{\PYZpc{}end}
+          \PY{k}{end}
+          \PY{n}{d} \PY{p}{=} \PY{n}{centroids}\PY{p}{(}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+          \PY{n}{e} \PY{p}{=} \PY{n}{centroids}\PY{p}{(}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+          \PY{n}{u} \PY{p}{=} \PY{p}{[}\PY{n}{d}\PY{p}{,} \PY{n+nb}{ones}\PY{p}{(}\PY{n+nb}{length}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{o}{\PYZbs{}}\PY{n}{e}\PY{p}{;} \PY{c}{\PYZpc{} Data fitting using least squares}
+          \PY{n}{a}\PY{p}{=}\PY{n}{u}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}\PY{p}{,} \PY{n}{b}\PY{p}{=}\PY{n}{u}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;} \PY{c}{\PYZpc{} Slope and intercept of best\PYZhy{}fit line}
+          
+          \PY{c}{\PYZpc{} filtered objects}
+          \PY{n}{objs\PYZus{}f} \PY{p}{=} \PY{n}{struct}\PY{p}{(}\PY{n}{object\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          
+          \PY{k}{for} \PY{n}{f}\PY{p}{=}\PY{n+nb}{length}\PY{p}{(}\PY{n}{object\PYZus{}data}\PY{p}{)}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{1}
+              \PY{n}{objs} \PY{p}{=} \PY{n}{object\PYZus{}data}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{;}
+              \PY{c}{\PYZpc{}n\PYZus{}objects = objs.num\PYZus{}objects;}
+              \PY{c}{\PYZpc{}for k=1:n\PYZus{}objects}
+              \PY{n}{centroidX} \PY{p}{=} \PY{n}{objs}\PY{p}{.}\PY{n}{objects}\PY{p}{.}\PY{n}{col\PYZus{}mean}\PY{p}{;}
+              \PY{n}{centroidY} \PY{p}{=} \PY{n}{M} \PY{o}{\PYZhy{}} \PY{n}{objs}\PY{p}{.}\PY{n}{objects}\PY{p}{.}\PY{n}{row\PYZus{}mean} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{;}
+                  
+              \PY{n}{Y} \PY{p}{=} \PY{n}{a}\PY{o}{*}\PY{n}{centroidX} \PY{o}{+} \PY{n}{b}\PY{p}{;}
+              \PY{c}{\PYZpc{} Remove object if distance to track line is greater than threshold}
+              \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{Y} \PY{o}{\PYZhy{}} \PY{n}{centroidY}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{p}{=} \PY{l+m+mi}{20}
+              
+                  \PY{n}{objs\PYZus{}f}\PY{p}{(}\PY{n}{f}\PY{p}{)} \PY{p}{=} \PY{p}{[}\PY{p}{]}\PY{p}{;}
+              \PY{k}{end}
+          
+              \PY{c}{\PYZpc{}end}
+          \PY{k}{end}
+          
+          
+          
+          \PY{n}{X} \PY{p}{=} \PY{n}{objs\PYZus{}f}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Created file 'C:\textbackslash{}Users\textbackslash{}cadep\textbackslash{}School\textbackslash{}CS\_6640\textbackslash{}A7\textbackslash{}CS6640\_data\_collection.m'.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}354}]:} \PY{c}{\PYZpc{}\PYZpc{}file CS6640\PYZus{}feature\PYZus{}extraction.m}
+          \PY{k}{function}\PY{+w}{ }X \PY{p}{=}\PY{+w}{ }\PY{n+nf}{CS6640\PYZus{}feature\PYZus{}extraction}\PY{p}{(}samples\PY{p}{)}
+          \PY{c}{\PYZpc{} CS6640\PYZus{}feature\PYZus{}extraction \PYZhy{} Given data samples, generate feature vectors}
+          \PY{c}{\PYZpc{} On input:}
+          \PY{c}{\PYZpc{}     samples (nx1 struct array) object\PYZus{}data samples }
+          \PY{c}{\PYZpc{} On output:}
+          \PY{c}{\PYZpc{}     X (nxm array): n samples of m\PYZhy{}tuple feature vectors}
+          \PY{c}{\PYZpc{} Call:}
+          \PY{c}{\PYZpc{}     X = CS6640\PYZus{}feature\PYZus{}extraction(samples)}
+          \PY{c}{\PYZpc{} Author:}
+          \PY{c}{\PYZpc{}     Cade Parkison}
+          \PY{c}{\PYZpc{}     UU}
+          \PY{c}{\PYZpc{}     Fall 2018}
+          \PY{c}{\PYZpc{}}
+          
+          \PY{n}{n} \PY{p}{=} \PY{n+nb}{length}\PY{p}{(}\PY{n}{samples}\PY{p}{)}\PY{p}{;}   \PY{c}{\PYZpc{} number of samples}
+          \PY{n}{m} \PY{p}{=} \PY{l+m+mi}{1}\PY{p}{;}                \PY{c}{\PYZpc{} number of features}
+          
+          \PY{n}{X} \PY{p}{=} \PY{n+nb}{zeros}\PY{p}{(}\PY{p}{[}\PY{n}{n}\PY{p}{,}\PY{n}{m}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+          
+          \PY{k}{for} \PY{n+nb}{i}\PY{p}{=}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{n}
+          
+              \PY{c}{\PYZpc{} Size feature}
+              \PY{n}{num\PYZus{}pixels} \PY{p}{=} \PY{n}{samples}\PY{p}{(}\PY{n+nb}{i}\PY{p}{)}\PY{p}{.}\PY{n}{objects}\PY{p}{.}\PY{n}{num\PYZus{}pixels}\PY{p}{;}
+              \PY{n}{X}\PY{p}{(}\PY{n+nb}{i}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{p}{=} \PY{n}{num\PYZus{}pixels}\PY{p}{;}
+              
+          \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Created file 'C:\textbackslash{}Users\textbackslash{}cadep\textbackslash{}School\textbackslash{}CS\_6640\textbackslash{}A7\textbackslash{}CS6640\_feature\_extraction.m'.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}421}]:} \PY{c}{\PYZpc{}\PYZpc{}file CS6640\PYZus{}bayes\PYZus{}eval.m}
+          \PY{k}{function}\PY{+w}{ }classes \PY{p}{=}\PY{+w}{ }\PY{n+nf}{CS6640\PYZus{}bayes\PYZus{}eval}\PY{p}{(}X, cp, cm\PY{p}{)}
+          \PY{c}{\PYZpc{} CS6640\PYZus{}bayes\PYZus{}eval \PYZhy{} gets resulting class for each frame in a data set}
+          \PY{c}{\PYZpc{} On input:}
+          \PY{c}{\PYZpc{}     X (nxm array): n samples of m\PYZhy{}tuple feature vectors}
+          \PY{c}{\PYZpc{}     class\PYZus{}probs (1xn vector): probabilities of n classes (sums to 1)}
+          \PY{c}{\PYZpc{}     class\PYZus{}models (1xn vector struct): class models: means and}
+          \PY{c}{\PYZpc{}     variances}
+          \PY{c}{\PYZpc{}       (k).mean (mx1 vector): k\PYZus{}th class mean vector}
+          \PY{c}{\PYZpc{}       (k).var (mxm array): k\PYZus{}th class covariance matrix}
+          \PY{c}{\PYZpc{} On output:}
+          \PY{c}{\PYZpc{}     classes (nx1 array): n detected classes from CS6640\PYZus{}Bayes}
+          \PY{c}{\PYZpc{} Call:}
+          \PY{c}{\PYZpc{}     classes = CS6640\PYZus{}bayes\PYZus{}eval(X)}
+          \PY{c}{\PYZpc{} Author:}
+          \PY{c}{\PYZpc{}     Cade Parkison}
+          \PY{c}{\PYZpc{}     UU}
+          \PY{c}{\PYZpc{}     Fall 2018}
+          \PY{c}{\PYZpc{}}
+          
+          \PY{n}{classes} \PY{p}{=} \PY{n+nb}{zeros}\PY{p}{(}\PY{p}{[}\PY{n+nb}{length}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+          
+          \PY{k}{for} \PY{n+nb}{i}\PY{p}{=}\PY{l+m+mi}{1}\PY{p}{:}\PY{n+nb}{length}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+              \PY{n}{classes}\PY{p}{(}\PY{n+nb}{i}\PY{p}{)} \PY{p}{=} \PY{n}{CS6640\PYZus{}Bayes}\PY{p}{(}\PY{n}{X}\PY{p}{(}\PY{n+nb}{i}\PY{p}{)}\PY{p}{,}\PY{n}{cp}\PY{p}{,}\PY{n}{cm}\PY{p}{)}\PY{p}{;}
+          \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Created file 'C:\textbackslash{}Users\textbackslash{}cadep\textbackslash{}School\textbackslash{}CS\_6640\textbackslash{}A7\textbackslash{}CS6640\_bayes\_eval.m'.
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\paragraph{Testing}\label{testing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{format} \PY{n}{compact}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{c}{\PYZpc{}plot native}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}281}]:} \PY{n}{clear} \PY{n}{all}\PY{p}{;}\PY{n}{close} \PY{n}{all}\PY{p}{;}\PY{n}{clc}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}341}]:} \PY{n}{car1} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{car1.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{car2} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{car2.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{car1\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{car1.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{car2\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{car2.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          
+          \PY{n}{bus1} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{bus1.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{bus2} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{bus2.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{bus1\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{bus1.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{bus2\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{bus2.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          
+          \PY{n}{truck1} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{truck1.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{truck2} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{truck2.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{truck1\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{truck1.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{truck2\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{truck2.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    Car:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}283}]:} \PY{n}{M1} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{car1}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}284}]:} \PY{n}{M2} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{car2}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}342}]:} \PY{n}{c1\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{M1}\PY{p}{,}\PY{n}{car1\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{c2\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{M2}\PY{p}{,}\PY{n}{car2\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n+nb}{size}\PY{p}{(}\PY{n}{c1\PYZus{}data}\PY{p}{)}\PY{p}{,}\PY{n+nb}{size}\PY{p}{(}\PY{n}{c2\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     1   177
+ans =
+     1   226
+
+
+    \end{Verbatim}
+
+    Truck:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}338}]:} \PY{n}{M3} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{truck1}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}339}]:} \PY{n}{M4} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{truck2}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}343}]:} \PY{n}{t1\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{M3}\PY{p}{,}\PY{n}{truck1\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{t2\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{M4}\PY{p}{,}\PY{n}{truck2\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n+nb}{size}\PY{p}{(}\PY{n}{t1\PYZus{}data}\PY{p}{)}\PY{p}{,}\PY{n+nb}{size}\PY{p}{(}\PY{n}{t2\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     1   175
+ans =
+     1   167
+
+
+    \end{Verbatim}
+
+    Bus:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}340}]:} \PY{n}{M5} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{bus1}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}347}]:} \PY{n}{M6} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{bus2}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}351}]:} \PY{n}{b1\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{M5}\PY{p}{,}\PY{n}{bus1\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{b2\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{M6}\PY{p}{,}\PY{n}{bus2\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n+nb}{size}\PY{p}{(}\PY{n}{b1\PYZus{}data}\PY{p}{)}\PY{p}{,}\PY{n+nb}{size}\PY{p}{(}\PY{n}{b2\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     1   243
+ans =
+     1   297
+
+
+    \end{Verbatim}
+
+    \textbf{Data Collection and filtering:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}348}]:} \PY{n}{c1\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{c1\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n}{c2\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{c2\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n+nb}{size}\PY{p}{(}\PY{n}{c1\PYZus{}objs}\PY{p}{)}\PY{p}{,} \PY{n+nb}{size}\PY{p}{(}\PY{n}{c2\PYZus{}objs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     1   116
+ans =
+     1   213
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}349}]:} \PY{n}{t1\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{t1\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n}{t2\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{t2\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n+nb}{size}\PY{p}{(}\PY{n}{t1\PYZus{}objs}\PY{p}{)}\PY{p}{,} \PY{n+nb}{size}\PY{p}{(}\PY{n}{t2\PYZus{}objs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     1   138
+ans =
+     1   167
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}352}]:} \PY{n}{b1\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{b1\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n}{b2\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{b2\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n+nb}{size}\PY{p}{(}\PY{n}{b1\PYZus{}objs}\PY{p}{)}\PY{p}{,} \PY{n+nb}{size}\PY{p}{(}\PY{n}{b2\PYZus{}objs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     1   243
+ans =
+     1   257
+
+
+    \end{Verbatim}
+
+    \textbf{Generate Feature Vectors:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}355}]:} \PY{n}{car\PYZus{}samples} \PY{p}{=} \PY{p}{[}\PY{n}{c1\PYZus{}objs}\PY{p}{,} \PY{n}{c2\PYZus{}objs}\PY{p}{]}\PY{p}{;}
+          \PY{n}{Xc} \PY{p}{=} \PY{n}{CS6640\PYZus{}feature\PYZus{}extraction}\PY{p}{(}\PY{n}{car\PYZus{}samples}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}356}]:} \PY{n}{truck\PYZus{}samples} \PY{p}{=} \PY{p}{[}\PY{n}{t1\PYZus{}objs}\PY{p}{,} \PY{n}{t2\PYZus{}objs}\PY{p}{]}\PY{p}{;}
+          \PY{n}{Xt} \PY{p}{=} \PY{n}{CS6640\PYZus{}feature\PYZus{}extraction}\PY{p}{(}\PY{n}{truck\PYZus{}samples}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}357}]:} \PY{n}{bus\PYZus{}samples} \PY{p}{=} \PY{p}{[}\PY{n}{b1\PYZus{}objs}\PY{p}{,} \PY{n}{b2\PYZus{}objs}\PY{p}{]}\PY{p}{;}
+          \PY{n}{Xb} \PY{p}{=} \PY{n}{CS6640\PYZus{}feature\PYZus{}extraction}\PY{p}{(}\PY{n}{bus\PYZus{}samples}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}358}]:} \PY{n+nb}{size}\PY{p}{(}\PY{n}{Xc}\PY{p}{)}\PY{p}{,}\PY{n+nb}{size}\PY{p}{(}\PY{n}{Xt}\PY{p}{)}\PY{p}{,}\PY{n+nb}{size}\PY{p}{(}\PY{n}{Xb}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   329     1
+ans =
+   305     1
+ans =
+   500     1
+
+
+    \end{Verbatim}
+
+    Build Models:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}359}]:} \PY{n}{Mc} \PY{p}{=} \PY{n}{CS6640\PYZus{}build\PYZus{}Bayes}\PY{p}{(}\PY{n}{Xc}\PY{p}{)}\PY{p}{;}
+          \PY{n}{Mt} \PY{p}{=} \PY{n}{CS6640\PYZus{}build\PYZus{}Bayes}\PY{p}{(}\PY{n}{Xt}\PY{p}{)}\PY{p}{;}
+          \PY{n}{Mb} \PY{p}{=} \PY{n}{CS6640\PYZus{}build\PYZus{}Bayes}\PY{p}{(}\PY{n}{Xb}\PY{p}{)}\PY{p}{;}
+          
+          \PY{n}{P} \PY{p}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}  \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}  \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{;}
+          \PY{n}{M} \PY{p}{=} \PY{p}{[}\PY{n}{Mc}\PY{p}{,} \PY{n}{Mt}\PY{p}{,} \PY{n}{Mb}\PY{p}{]}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}361}]:} \PY{n}{Mc}\PY{p}{.}\PY{n}{mean}\PY{p}{,}\PY{n}{Mt}\PY{p}{.}\PY{n}{mean}\PY{p}{,}\PY{n}{Mb}\PY{p}{.}\PY{n}{mean}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+  931.2401
+ans =
+   2.0942e+03
+ans =
+   3.8603e+03
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}362}]:} \PY{n}{Mc}\PY{p}{.}\PY{n}{var}\PY{p}{,}\PY{n}{Mt}\PY{p}{.}\PY{n}{var}\PY{p}{,}\PY{n}{Mb}\PY{p}{.}\PY{n}{var}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   2.5207e+05
+ans =
+   9.1540e+05
+ans =
+   7.0009e+06
+
+
+    \end{Verbatim}
+
+    \textbf{Plot model data:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}376}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y1}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}444}]:} \PY{n}{clf}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}472}]:} \PY{n}{clf}\PY{p}{;}
+          \PY{n}{hold} \PY{n}{on}\PY{p}{;}
+          \PY{n}{y1} \PY{p}{=} \PY{n}{normpdf}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{Mc}\PY{p}{.}\PY{n}{mean}\PY{p}{,} \PY{n}{Mc}\PY{p}{.}\PY{n}{var}\PY{p}{)}\PY{p}{;}
+          
+          
+          \PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y1}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZhy{}\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{DisplayName\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Car\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}471}]:} \PY{n}{clf}\PY{p}{;}
+          \PY{n}{hold} \PY{n}{on}\PY{p}{;}
+          
+          \PY{n}{x} \PY{p}{=} \PY{n+nb}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{30000}\PY{p}{,} \PY{l+m+mi}{40000}\PY{p}{)}\PY{p}{;}
+          
+          \PY{n}{y1} \PY{p}{=} \PY{n}{normpdf}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{Mc}\PY{p}{.}\PY{n}{mean}\PY{p}{,} \PY{n}{Mc}\PY{p}{.}\PY{n}{var}\PY{p}{)}\PY{p}{;}
+          \PY{n}{y2} \PY{p}{=} \PY{n}{normpdf}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{Mt}\PY{p}{.}\PY{n}{mean}\PY{p}{,} \PY{n}{Mt}\PY{p}{.}\PY{n}{var}\PY{p}{)}\PY{p}{;}
+          \PY{n}{y3} \PY{p}{=} \PY{n}{normpdf}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{Mb}\PY{p}{.}\PY{n}{mean}\PY{p}{,} \PY{n}{Mb}\PY{p}{.}\PY{n}{var}\PY{p}{)}\PY{p}{;}
+          
+          \PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y1}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{b\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{DisplayName\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Car\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y2}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{r\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{DisplayName\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Truck\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y3}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{g\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{DisplayName\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Bus\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          
+          
+          \PY{n}{scatter}\PY{p}{(}\PY{n}{Mc}\PY{p}{.}\PY{n}{mean}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Marker\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{x\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{DisplayName\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Car mean\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{scatter}\PY{p}{(}\PY{n}{Mt}\PY{p}{.}\PY{n}{mean}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Marker\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{o\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{DisplayName\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Truck mean\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{scatter}\PY{p}{(}\PY{n}{Mb}\PY{p}{.}\PY{n}{mean}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Marker\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{*\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{DisplayName\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Bus mean\PYZsq{}}\PY{p}{)}\PY{p}{;}
+               
+          \PY{n}{legend}\PY{p}{(}\PY{p}{)}
+                 
+          \PY{c}{\PYZpc{}xlabel(\PYZsq{}x\PYZsq{})}
+          \PY{c}{\PYZpc{}ylabel(\PYZsq{}f(x|mu,sigma)\PYZsq{})}
+          \PY{n}{title}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Probability Distributions of each Class\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\textbf{Evaluation:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}404}]:} \PY{n}{c3} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{car3.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{t3} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{truck3.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{b3} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{bus3.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          
+          \PY{n}{c3\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{car3.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{t3\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{truck3.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{b3\PYZus{}} \PY{p}{=} \PY{n}{VideoReader}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{bus3.avi\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}397}]:} \PY{n}{MMc} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{c3}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}398}]:} \PY{n}{MMt} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{t3}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}405}]:} \PY{n}{MMb} \PY{p}{=} \PY{n}{CS6640\PYZus{}MM}\PY{p}{(}\PY{n}{b3}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}410}]:} \PY{n}{c3\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{MMc}\PY{p}{,}\PY{n}{c3\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{c3\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{c3\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n}{Xc3} \PY{p}{=} \PY{n}{CS6640\PYZus{}feature\PYZus{}extraction}\PY{p}{(}\PY{n}{c3\PYZus{}objs}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}407}]:} \PY{n}{t3\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{MMt}\PY{p}{,}\PY{n}{t3\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{t3\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{t3\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n}{Xt3} \PY{p}{=} \PY{n}{CS6640\PYZus{}feature\PYZus{}extraction}\PY{p}{(}\PY{n}{t3\PYZus{}objs}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}408}]:} \PY{n}{b3\PYZus{}data} \PY{p}{=} \PY{n}{CS6640\PYZus{}object\PYZus{}data}\PY{p}{(}\PY{n}{MMb}\PY{p}{,}\PY{n}{b3\PYZus{}}\PY{p}{)}\PY{p}{;}
+          \PY{n}{b3\PYZus{}objs} \PY{p}{=} \PY{n}{CS6640\PYZus{}data\PYZus{}collection}\PY{p}{(}\PY{n}{b3\PYZus{}data}\PY{p}{)}\PY{p}{;}
+          \PY{n}{Xb3} \PY{p}{=} \PY{n}{CS6640\PYZus{}feature\PYZus{}extraction}\PY{p}{(}\PY{n}{b3\PYZus{}objs}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}413}]:} \PY{n+nb}{length}\PY{p}{(}\PY{n}{Xc3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   112
+
+
+    \end{Verbatim}
+
+    \textbf{Eval of Training Data:}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}414}]:} \PY{n}{X} \PY{p}{=} \PY{n}{Xc}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   116     1
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}416}]:} \PY{n}{cp} \PY{p}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}  \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}  \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{;}
+          \PY{n}{cm} \PY{p}{=} \PY{p}{[}\PY{n}{Mc} \PY{n}{Mt} \PY{n}{Mb}\PY{p}{]}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}423}]:} \PY{n}{c\PYZus{}classes\PYZus{}t} \PY{p}{=} \PY{n}{CS6640\PYZus{}bayes\PYZus{}eval}\PY{p}{(}\PY{n}{Xc}\PY{p}{,} \PY{n}{cp}\PY{p}{,} \PY{n}{cm}\PY{p}{)}\PY{p}{;}
+          \PY{n}{t\PYZus{}classes\PYZus{}t} \PY{p}{=} \PY{n}{CS6640\PYZus{}bayes\PYZus{}eval}\PY{p}{(}\PY{n}{Xt}\PY{p}{,} \PY{n}{cp}\PY{p}{,} \PY{n}{cm}\PY{p}{)}\PY{p}{;}
+          \PY{n}{b\PYZus{}classes\PYZus{}t} \PY{p}{=} \PY{n}{CS6640\PYZus{}bayes\PYZus{}eval}\PY{p}{(}\PY{n}{Xb}\PY{p}{,} \PY{n}{cp}\PY{p}{,} \PY{n}{cm}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    Correct Percentages:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}426}]:} \PY{n}{car} \PY{p}{=} \PY{n+nb}{ones}\PY{p}{(}\PY{p}{[}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xc}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+          \PY{n}{truck} \PY{p}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb}{ones}\PY{p}{(}\PY{p}{[}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xt}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+          \PY{n}{bus} \PY{p}{=} \PY{l+m+mi}{3}\PY{o}{*}\PY{n+nb}{ones}\PY{p}{(}\PY{p}{[}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xb}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}428}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{c\PYZus{}classes\PYZus{}t} \PY{o}{==} \PY{n}{car}\PY{p}{)}\PY{o}{/}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xc}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    0.8936
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}451}]:} \PY{n+nb}{size}\PY{p}{(}\PY{n}{c\PYZus{}classes\PYZus{}t}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   329     1
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}450}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{c\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   294
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}452}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{c\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    35
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}453}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{c\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     0
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}430}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{t\PYZus{}classes\PYZus{}t} \PY{o}{==} \PY{n}{truck}\PY{p}{)}\PY{o}{/}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xt}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    0.5803
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}454}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{t\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    96
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}455}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{t\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   177
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}456}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{t\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    32
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}431}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{b\PYZus{}classes\PYZus{}t} \PY{o}{==} \PY{n}{bus}\PY{p}{)}\PY{o}{/}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xb}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    0.4820
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}457}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{b\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   108
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}458}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{b\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   151
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}459}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{b\PYZus{}classes\PYZus{}t}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   241
+
+
+    \end{Verbatim}
+
+    Evaluation on remaining videos:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}432}]:} \PY{n}{c3\PYZus{}classes} \PY{p}{=} \PY{n}{CS6640\PYZus{}bayes\PYZus{}eval}\PY{p}{(}\PY{n}{Xc3}\PY{p}{,} \PY{n}{cp}\PY{p}{,} \PY{n}{cm}\PY{p}{)}\PY{p}{;}
+          \PY{n}{t3\PYZus{}classes} \PY{p}{=} \PY{n}{CS6640\PYZus{}bayes\PYZus{}eval}\PY{p}{(}\PY{n}{Xt3}\PY{p}{,} \PY{n}{cp}\PY{p}{,} \PY{n}{cm}\PY{p}{)}\PY{p}{;}
+          \PY{n}{b3\PYZus{}classes} \PY{p}{=} \PY{n}{CS6640\PYZus{}bayes\PYZus{}eval}\PY{p}{(}\PY{n}{Xb3}\PY{p}{,} \PY{n}{cp}\PY{p}{,} \PY{n}{cm}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}433}]:} \PY{n}{car3} \PY{p}{=} \PY{n+nb}{ones}\PY{p}{(}\PY{p}{[}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xc3}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+          \PY{n}{truck3} \PY{p}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb}{ones}\PY{p}{(}\PY{p}{[}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xt3}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+          \PY{n}{bus3} \PY{p}{=} \PY{l+m+mi}{3}\PY{o}{*}\PY{n+nb}{ones}\PY{p}{(}\PY{p}{[}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xb3}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}434}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{c3\PYZus{}classes} \PY{o}{==} \PY{n}{car3}\PY{p}{)}\PY{o}{/}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xc3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    0.9286
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}460}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{c3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   104
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}461}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{c3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     8
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}462}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{c3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     0
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}435}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{t3\PYZus{}classes} \PY{o}{==} \PY{n}{truck3}\PY{p}{)}\PY{o}{/}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xt3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    0.2991
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}463}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{t3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    48
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}464}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{t3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    67
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}465}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{t3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   109
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}436}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{b3\PYZus{}classes} \PY{o}{==} \PY{n}{bus3}\PY{p}{)}\PY{o}{/}\PY{n+nb}{length}\PY{p}{(}\PY{n}{Xb3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    0.8941
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}466}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{b3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+     0
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}467}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{b3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+    27
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}468}]:} \PY{n}{sum}\PY{p}{(}\PY{n}{b3\PYZus{}classes} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ans =
+   228
+
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
