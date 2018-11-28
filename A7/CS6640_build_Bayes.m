@@ -13,3 +13,6 @@ function model = CS6640_build_Bayes(X)
 %     UU
 %     Fall 2018
 %
+
+model.mean = mean(X)';
+model.var = cov(X);
